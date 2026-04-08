@@ -11,10 +11,5 @@ public class Hueco_controller {
     @Autowired
     private Hueco hueco;
 
-    @PostMapping("añadir_usuario")
-    @ResponseBody
-    public ResponseEntity<?> añadir_usuario(@RequestParam String correo, @RequestParam String password){
-        if()
-    }
 
 }
