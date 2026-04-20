@@ -1,6 +1,8 @@
 package com.example.demo.service;
+import com.example.demo.modelos.Usuario;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import java.security.Key;
@@ -14,13 +16,27 @@ public class JwtService {
     @Value("${worklink.jwt.secret}")
     private String secret;
 
-    public String generateToken(String correo){
+    public String generateToken(String correo, Rol_usuario rol){
         Key key = Keys.hmacShaKeyFor(secret.getBytes());
         return Jwts.builder()
             .setSubject(correo)
+            .claim("rol", rol)
             .setIssuedAt(new Date())
             .setExpiration(new Date(System.currentTimeMillis() + 3600000)) //Tiempo de expiracion=hora actual + cte
             .signWith(key, SignatureAlgorithm.HS256)
             .compact();
     }
+
+    public boolean verificarToken(String token){
+        try {
+            Key key = Keys.hmacShaKeyFor(secret.getBytes());
+            Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody(); //decodificamos el jwt
+            String rol = claims.get("role", String.class);
+            return "ADMIN".equals(rol);
+        }
+        catch(Exception e){
+            return false;
+        }
+    } /*Esta funcion devuelve true si el JWT es de un admin, sino sera false*/
+
 }
