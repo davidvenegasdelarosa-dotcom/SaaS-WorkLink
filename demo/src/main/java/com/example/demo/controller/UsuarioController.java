@@ -9,12 +9,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody; 
+import java.lang.String;
 
 public class UsuarioController {
     @Autowired
     private UsuarioRepository usuario_repositorio;
     @Autowired 
     private JwtService jwt;
+    private String gmail = "@gmail.com";
 
     @PostMapping("/login")
     @ResponseBody
@@ -33,10 +35,13 @@ public class UsuarioController {
     @ResponseBody
     public ResponseEntity<?> crear_cuenta(@RequestBody Usuario usuario){
         try{
-            if(!usuario_repositorio.existsByCorreo(usuario.getLogin_correo())){
+            if(!usuario_repositorio.existsByCorreo(usuario.getLogin_Correo())){
                 Usuario nuevo = usuario_repositorio.save(usuario);
                 return ResponseEntity.status(HttpStatus.CONFLICT).body(nuevo);
-            } else return ResponseEntity.status(HttpStatus.CONFLICT).body("Este correo ya existe");
+            } if(usuario.getLogin_correo.endsWith(gmail)){
+                return ResponseEntity.status(HttpStatus.CONFLICT).body("El correo debe tener la extensión @gmail.com");
+            }
+            else return ResponseEntity.status(HttpStatus.CONFLICT).body("Este correo ya existe");
         } catch(Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Se ha producido un error desconocido");
         }

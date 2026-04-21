@@ -1,14 +1,17 @@
 package com.example.demo.modelos;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import java.util.List;
 @Entity
 public class Usuario {
+
+    private List<Reserva> lista_de_reservas;
 
     @NotBlank(message = "El nombre no puede esar vacío")
     private char nombre;
 
     @Id //El correo es el que identifica a cada usuario
-    @NotBlank(message = "El correo y contraseña no pueden etar vacíos")
+    @NotBlank(message = "El correo y contraseña no pueden estar vacíos")
     private Login login;
 
     @Enumerated(EnumType.STRING)
