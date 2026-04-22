@@ -15,5 +15,18 @@ public class Sala {
     }
 
     @OneToMany(mappedBy = "sala")
-    List<Hueco> huecos; //Una sala sera, obviamente, una sucesión de huecos disponibles y en uso
+    List<Hueco> huecos; //Una sala será, obviamente, una sucesión de huecos disponibles y en uso
+
+    public List<hueco> getListaHuecos(){
+        return huecos;
+    }
+
+    public Hueco getHueco(long id_hueco){
+        huecos.get(id_hueco);
+    }
+
+    public void cambiar_estado(long id_hueco){
+        Hueco hueco = huecoos.get(id.hueco);
+        hueco.disponible_a_uso();
+    }
 }

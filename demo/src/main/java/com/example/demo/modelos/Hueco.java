@@ -2,14 +2,15 @@ package com.example.demo.modelos;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
 public class Hueco {
-    
-    public enum Rol_hueco{
-        DISPONIBLE, EN_USO
-    }
 
-    private Rol_hueco rol_hueco;
+    private int id;
+    private boolean ocupado; //Si el hueco esta ocupado, será true, sinó falso.
 
     @ManyToOne
     @JoinColumn(name = "sala_id")
     Sala sala;
+
+    public void disponible_a_uso(){
+        ocupado = true;
+    }
 }

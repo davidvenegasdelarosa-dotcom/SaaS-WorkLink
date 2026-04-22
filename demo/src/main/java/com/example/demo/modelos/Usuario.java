@@ -5,7 +5,7 @@ import java.util.List;
 @Entity
 public class Usuario {
 
-    private List<Reserva> lista_de_reservas;
+    private List<Hueco> reserva; //Las reservas será una lista de huecos no disponibles
 
     @NotBlank(message = "El nombre no puede esar vacío")
     private char nombre;
