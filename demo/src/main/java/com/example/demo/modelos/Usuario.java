@@ -17,11 +17,25 @@ public class Usuario {
     @Enumerated(EnumType.STRING)
     private Rol_usuario rol_usuario;
 
+    public Object getLogin_correo;
+
     public enum Rol_usuario{
         ADMIN, CLIENTE
     }
 
+    public Login getLogin(){
+        return login;
+    }
+
+    public void incrementarReserva(Hueco hueco){
+        reserva.add(hueco);
+    }
+
     public String getLogin_correo(){
         return login.getCorreo();
+    }
+
+    public String getRol(){
+        return rol_usuario.toString();
     }
 }

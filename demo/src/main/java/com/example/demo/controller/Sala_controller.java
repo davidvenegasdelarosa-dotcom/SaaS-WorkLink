@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 import com.example.demo.modelos.Hueco;
 import com.example.demo.modelos.Sala;
+import com.example.demo.service.Sala_service;
 import java.util.List;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;

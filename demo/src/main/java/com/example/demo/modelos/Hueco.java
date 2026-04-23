@@ -10,7 +10,12 @@ public class Hueco {
     @JoinColumn(name = "sala_id")
     Sala sala;
 
-    public void disponible_a_uso(){
-        ocupado = true;
+    public void cambiarEstado(boolean estado){
+        ocupado = estado;
     }
+
+    public boolean getEstado(){
+        return ocupado;
+    }
+
 }

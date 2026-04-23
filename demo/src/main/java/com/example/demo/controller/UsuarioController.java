@@ -20,13 +20,13 @@ public class UsuarioController {
 
     @PostMapping("/login")
     @ResponseBody
-    public ResponseEntity<?> iniciar_sesion(@RequestBody Login login){
-        if(!usuario_repositorio.existsByCorreo(login.getCorreo())){
+    public ResponseEntity<?> iniciar_sesion(@RequestBody Usuario user){
+        if(!usuario_repositorio.existsByCorreo(user.getLogin_correo())){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Este correo no existe");
-        } else if(!usuario_repositorio.existsByLogin(login)){
+        } else if(!usuario_repositorio.existsByLogin(user.getLogin())){
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("La contraseña es incorrecta");
         } else {
-            String token = jwt.generateToken(login.getCorreo());
+            String token = jwt.generateToken(user.getLogin_correo(), user.getRol());
             return ResponseEntity.ok(token);
         }
     }
@@ -35,10 +35,10 @@ public class UsuarioController {
     @ResponseBody
     public ResponseEntity<?> crear_cuenta(@RequestBody Usuario usuario){
         try{
-            if(!usuario_repositorio.existsByCorreo(usuario.getLogin_Correo())){
+            if(!usuario_repositorio.existsByCorreo(usuario.getLogin_correo())){
                 Usuario nuevo = usuario_repositorio.save(usuario);
                 return ResponseEntity.status(HttpStatus.CONFLICT).body(nuevo);
-            } if(usuario.getLogin_correo.endsWith(gmail)){
+            } if(((String) usuario.getLogin_correo).endsWith(gmail)){
                 return ResponseEntity.status(HttpStatus.CONFLICT).body("El correo debe tener la extensión @gmail.com");
             }
             else return ResponseEntity.status(HttpStatus.CONFLICT).body("Este correo ya existe");

@@ -16,7 +16,7 @@ public class JwtService {
     @Value("${worklink.jwt.secret}")
     private String secret;
 
-    public String generateToken(String correo, Rol_usuario rol){
+    public String generateToken(String correo, String rol){
         Key key = Keys.hmacShaKeyFor(secret.getBytes());
         return Jwts.builder()
             .setSubject(correo)
