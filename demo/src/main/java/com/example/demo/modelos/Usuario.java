@@ -7,7 +7,7 @@ public class Usuario {
 
     private List<Hueco> reserva; //Las reservas será una lista de huecos no disponibles
 
-    @NotBlank(message = "El nombre no puede esar vacío")
+    @NotBlank(message = "El nombre no puede estar vacío")
     private char nombre;
 
     @Id //El correo es el que identifica a cada usuario
@@ -25,6 +25,11 @@ public class Usuario {
 
     public Login getLogin(){
         return login;
+    }
+
+    public void eliminarReserva(Hueco hueco){
+        reserva.remove(hueco);
+        hueco.cambiarEstado(false);
     }
 
     public void incrementarReserva(Hueco hueco){

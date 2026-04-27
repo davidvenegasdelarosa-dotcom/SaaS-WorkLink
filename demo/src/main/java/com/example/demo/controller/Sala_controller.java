@@ -19,6 +19,6 @@ public class Sala_controller {
     @GetMapping()
     public ResponseEntity<List<Hueco>> mostrar_lista_huecos(@PathVariable long id){
         sala = sala_service.searchById(id);
-        return ResponseEntity.ok(sala.getListaHuecos());
+        return ResponseEntity.ok(sala.getListaHuecos()); //Mostramos la lista de huecos de la sala (disponibles o no)
     }
 }

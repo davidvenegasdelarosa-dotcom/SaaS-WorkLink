@@ -26,7 +26,6 @@ public class Sala {
     }
 
     public void cambiar_estado(int id_hueco){
-        Hueco hueco = huecos.get(id_hueco);
-        hueco.disponible_a_uso();
+        huecos.get(id_hueco).cambiarEstado(true);
     }
 }
