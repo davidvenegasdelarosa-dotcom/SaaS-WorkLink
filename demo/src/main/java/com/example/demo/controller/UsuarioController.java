@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 import com.example.demo.repository.UsuarioRepository;
+import com.example.demo.service.Usuario_service;
 import com.example.demo.modelos.Usuario;
 import com.example.demo.modelos.Login;
 import com.example.demo.service.JwtService;
@@ -14,26 +15,25 @@ import java.lang.String;
 public class UsuarioController {
     @Autowired
     private UsuarioRepository usuario_repositorio;
+    @Autoowired Usuario_service usuarioservice;
     @Autowired 
     private JwtService jwt;
+    @Autowired
+    private Login login;
     private String gmail = "@gmail.com";
 
     @PostMapping("/login")
     @ResponseBody
-    public ResponseEntity<?> iniciar_sesion(@RequestBody Usuario user){
-        if(!usuario_repositorio.existsByCorreo(user.getLogin_correo())){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Este correo no existe");
-        } else if(!usuario_repositorio.existsByLogin(user.getLogin())){
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("La contraseña es incorrecta");
-        } else {
-            String token = jwt.generateToken(user.getLogin_correo(), user.getRol());
-            return ResponseEntity.ok(token);
-        }
+    public ResponseEntity<?> iniciar_sesion(@RequestParam String correo, @RequestParam String password){
+        login.setCorreo(correo).setPassword(password);
+        usuarioservice.login(login);
+        // IMPORTANTE CORREGIR PARA OBTENER ROL DE USER: String token = jwt.generateToken(correo, user.rol());
+        return ResponseEntity.ok(token);
     }
 
     @PostMapping
     @ResponseBody
-    public ResponseEntity<?> crear_cuenta(@RequestBody Usuario usuario){
+    public ResponseEntity<?> crear_cuenta(@RequestParam String nombre, @RequestParam String correo, @RequestParam String password){
         try{
             if(!usuario_repositorio.existsByCorreo(usuario.getLogin_correo())){
                 Usuario nuevo = usuario_repositorio.save(usuario);

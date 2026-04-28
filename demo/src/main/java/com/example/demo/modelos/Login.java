@@ -4,8 +4,9 @@ public class Login {
     private String correo;
     private String password;
     public Login(){}
-    public void setCorreo(String correo){
+    public Login setCorreo(String correo){
         this.correo=correo;
+        return this;
     }
 
     public void setPassword(String password){
