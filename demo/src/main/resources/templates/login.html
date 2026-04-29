@@ -11,10 +11,18 @@
         <section>
             <h2>Iniciar sesión</h2>
             <form action="/login" method="POST">
-                <input type="text" name="correo" placeholder="Email o usuario: ">
+                <input type="text" name="correo" placeholder="Email: ">
                 <input type="text" name="password" placeholder="Contraseña: ">
-                <button type="submit">Iniciar sesión</button>
-                <!--Aqui podria poner para "crear cuenta"-->
+                <button type="submit">Iniciar sesión</button> <!--Editar esto apra que, con js, sea asíncrno-->
+            </form>
+        </section>
+        <section>
+            <h2>Crear cuenta</h2>
+            <form action="/create" method="POST">
+                <input type="text" name="nombre" placeholder="Nombre de usuario: ">
+                <input type="text" name="correo" placeholder="Email: ">
+                <input type="text" name="password" placeholder="Contraseña: ">
+                <button type="submit">Crear cuenta</button> <!--Editar esto para que, con js, sea asincrono-->
             </form>
         </section>
     </body>

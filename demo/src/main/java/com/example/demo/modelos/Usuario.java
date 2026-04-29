@@ -7,40 +7,54 @@ public class Usuario {
 
     private List<Hueco> reserva; //Las reservas será una lista de huecos no disponibles
 
-    @NotBlank(message = "El nombre no puede estar vacío")
-    private char nombre;
+    @NotBlank
+    private String name;
 
     @Id //El correo es el que identifica a cada usuario
-    @NotBlank(message = "El correo y contraseña no pueden estar vacíos")
-    private Login login;
+    @NotBlank(message = "El correo no puede estar vacío")
+    private String correo;
+
+    @NotBlank
+    private String password;
 
     @Enumerated(EnumType.STRING)
-    private Rol_usuario rol_usuario;
+    private Rol rol;
 
     public Object getLogin_correo;
 
-    public enum Rol_usuario{
+    public enum Rol{
         ADMIN, CLIENTE
     }
 
-    public Login getLogin(){
-        return login;
-    }
 
     public void eliminarReserva(Hueco hueco){
         reserva.remove(hueco);
         hueco.cambiarEstado(false);
     }
 
+    public Usuario setName(String name){
+        this.name = name;
+        return this;
+    }
+
     public void incrementarReserva(Hueco hueco){
         reserva.add(hueco);
     }
 
-    public String getLogin_correo(){
-        return login.getCorreo();
+    public void setPassword(String password){
+        this.password=password;
+    }
+
+    public Usuario setCorreo(String correo){
+        this.correo=correo;
+        return this;
+    }
+
+    public String getCorreo(){
+        return this.correo;
     }
 
     public String getRol(){
-        return rol_usuario.toString();
+        return rol.toString();
     }
 }
