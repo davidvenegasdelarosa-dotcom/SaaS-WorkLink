@@ -1,11 +1,11 @@
 package com.example.demo.service;
+import com.example.demo.modelos.Hueco;
+import java.util.List;
 import com.example.demo.repository.UsuarioRepository;
 import com.example.demo.modelos.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import jakarta.transaction.Transactional;
-import java.lang.String;
 
 @Service
 @Transactional
@@ -51,5 +51,11 @@ public class Usuario_service {
             throw new RuntimeException("Ha ocurrido un error inesperado");
         }
         return null;
+    }
+
+    public List<Hueco> misReservas(String token){
+        String correo = jwt.tokenCorreo(token);
+        Usuario user = userRepository.findByCorreo(correo);
+        return user.getReservas();
     }
 }

@@ -57,4 +57,8 @@ public class Usuario {
     public String getRol(){
         return rol.toString();
     }
+
+    public List<Hueco> getReservas(){
+        return this.reserva;
+    }
 }

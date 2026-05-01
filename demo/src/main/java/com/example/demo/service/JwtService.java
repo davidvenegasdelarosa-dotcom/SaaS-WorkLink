@@ -27,11 +27,11 @@ public class JwtService {
             .compact();
     }
 
-    public boolean verificarToken(String token){
+    public boolean verificarTokenAdmin(String token){
         try {
             Key key = Keys.hmacShaKeyFor(secret.getBytes());
             Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody(); //decodificamos el jwt
-            String rol = claims.get("role", String.class);
+            String rol = claims.get("rol", String.class);
             return "ADMIN".equals(rol);
         }
         catch(Exception e){
@@ -39,4 +39,13 @@ public class JwtService {
         }
     } /*Esta funcion devuelve true si el JWT es de un admin, sino sera false*/
 
+    public String tokenCorreo(String token){
+            try{
+                Key key = Keys.hmacShaKeyFor(secret.getBytes());
+                Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
+                return claims.getSubject();
+            } catch(Exception e){
+                return null;
+            }
+    }
 }

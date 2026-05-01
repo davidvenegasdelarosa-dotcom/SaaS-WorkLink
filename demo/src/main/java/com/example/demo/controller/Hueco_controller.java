@@ -11,16 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.service.Hueco_service;
 
 import com.example.demo.modelos.Hueco;
-import com.example.demo.modelos.Sala;
-import com.example.demo.service.Sala_service;
 import com.example.demo.modelos.Usuario;
 
 @RestController
 public class Hueco_controller{
     @Autowired
     private Hueco hueco;
-    @Autowired
-    private Sala_service sala_service;
     @Autowired
     private Hueco_service hueco_service;
 

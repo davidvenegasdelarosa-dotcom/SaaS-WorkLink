@@ -8,4 +8,6 @@ public interface UsuarioRepository extends JpaRepository <Usuario, String>{
     boolean existsByCorreo(String correo); //Comprobamos si el correo esta en la base de datos
     boolean existsByCorreoAndPassword(String correo, String password); //Comprobamos si el correo y la contraseña son una tupla
     Usuario findByCorreoAndPassword(String correo, String password); //Devuelve el usuario correspondiente al correo y contraseña pasados por parámetro
+
+    Usuario findByCorreo(String correo); //Devuelvr el usuario correspondiente al correo, lo usamos para el jwt
 }

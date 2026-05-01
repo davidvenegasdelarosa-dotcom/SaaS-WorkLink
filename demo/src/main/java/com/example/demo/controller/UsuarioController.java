@@ -2,15 +2,13 @@ package com.example.demo.controller;
 import com.example.demo.repository.UsuarioRepository;
 import com.example.demo.service.Usuario_service;
 import com.example.demo.modelos.Usuario;
+import com.example.demo.modelos.Hueco;
 import com.example.demo.service.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody; 
-import java.lang.String;
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
 public class UsuarioController {
     @Autowired
@@ -36,6 +34,12 @@ public class UsuarioController {
     public ResponseEntity<Usuario> crear_cuenta(@RequestParam String nombre, @RequestParam String correo, @RequestParam String password){
         Usuario user = usuarioservice.create(nombre, correo, password);
         return ResponseEntity.ok(user);
+    }
+
+    @GetMapping("/MisReservas")
+    @ResponseBody
+    public ResponseEntity<List<Hueco>> mostrarReservas(@RequestParam Usuario user){
+        return ResponseEntity.ok(user.getReservas());
     }
 
 }

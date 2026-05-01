@@ -25,6 +25,10 @@ public class Sala {
         return huecos.get(id_hueco);
     }
 
+    public List<Hueco> getHuecosLibresPorDia(){
+        return this.huecos;
+    }
+
     public void cambiar_estado(int id_hueco){
         huecos.get(id_hueco).cambiarEstado(true);
     }
